@@ -1,9 +1,10 @@
-title: intro-golang
+title: Introduction to golang
 description: A course to give basic introduction of golang
 template:
   repo: intro-golang-template
   name: intro-golang
 before:
+  - type: updateBranchProtection
   - type: createIssue
     title: Welcome!
     body: new-issue.md
@@ -14,3 +15,5 @@ steps:
     link: '{{ repoUrl }}'
     actions:
       - type: closeIssue
+tags:
+  - golang

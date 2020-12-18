@@ -1,9 +1,23 @@
-This is the description we show on the course page [here](https://lab.github.com/noobmaster-007/intro-golang). This first paragraph will be featured at the top of the page so make it great.
-​
+# Introduction to golang
+In this couse, you will learn the basic features of golang.
 
-​
-Be sure to tell the learner about the technology you are teaching, why they should learn it, how they can use it, and what you will teach them.
-​
+## Prerequisites
+Before you start the course, please make sure you have installed Go in your computer. See [installation guidance](https://golang.org/doc/install)
 
+## What you'll learn
+In this course, we will run through following concepts with examples
+* Variable and data types
+* Standard library fmt
+* Arithmetic and condition
+* If, else if and switch
+* loop
+* array and slice
+* map
+* function
+* pointers
+* struct and struct method
+* interfaces
+* goroutine
 
-Include information on how they can reach you for questions about the content or course. 
+## Audience
+Developers, Data Scientist
