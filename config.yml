@@ -3,17 +3,48 @@ description: A course to give basic introduction of golang
 template:
   repo: intro-golang-template
   name: intro-golang
+  description: 'A robot powered training repository :robot:'
 before:
   - type: updateBranchProtection
   - type: createIssue
-    title: Welcome!
-    body: new-issue.md
+    title: Welcome to Golang
+    body: 00_setup.md
+    comments:
+      - 00_open-pr.md
+
 steps:
-  - title: First step
-    description: The first step in your course
-    event: issues.assigned
-    link: '{{ repoUrl }}'
+  # Step 1: User opens a PR after setup repo locally
+  - title: Get Started
+    description: Welcome to Golang, let's get started.
+    event: pull_request.opened
+    link: '{{ repoUrl }}/issues/1'
     actions:
+      # Close the previous opened issue
       - type: closeIssue
+        issue: Welcome to Golang
+
+      # Once the issue 1 closed, give instruction to learner
+      - type: respond
+        with: 01_hello-world.md
+        issue: 2
+      
+      # Give instruction to learner to make some changes
+      - type: createPullRequestComment
+        body: 01_hello-world-activity.md
+
+        # The file property is based on the template file
+        file: src/01_hello_world.go
+        position: 2
+
+  # Step 2: User modified the Hello World program
+  - title: Hello World
+    description: Modify the "Hello World" program to print something else
+    event: push
+    link: '{{ repoUrl }}/issues/2'
+    actions:
+      - type: respond
+        with: 02_test.md
+
+
 tags:
   - golang
