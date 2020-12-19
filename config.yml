@@ -39,7 +39,7 @@ steps:
 
   # Step 2: User modified the Hello World program
   - title: Hello World
-    description: Modify the "Hello World" program to print something else
+    description: Your first golang program with "Hello World!"
     event: push
     link: '{{ repoUrl }}/issues/2'
     actions:
@@ -75,9 +75,50 @@ steps:
       - type: createPullRequestComment
         body: 02_variables-activity.md
         file: 'src/02_variables/main.go'
-        position: 3
+        position: 6
 
+  # Step 3: User create variables based on TODO comment
+  - title: Variables and data type
+    description: Define golang variables in various ways
+    event: push
+    link: '{{ repoUrl }}/issues/2'
+    actions:
+      # Check whether the changes pushed to changes branch or not
+      - type: gate
+        left: '%payload.ref%'
+        operator: ===
+        right: refs/heads/changes
+     
+      - type: getPullRequest
+        pullRequest: 2
+        action_id: metaPR2
+      
+      - type: getFileContents
+        action_id: fileContents
+        filename: 'src/02_variables/main.go'
+      
+      # Using regex to check the file content
+      - type: gate
+        # Validate uint8
+        - left: '/uint8.*?=.*?128$/gm'
+          operator: test
+          right: '%actions.fileContents%'
+        # Validate float32
+        - left: '/float32.*?=.*?3.14$/gm'
+          operator: test
+          right: '%actions.fileContents%'
+        # Validate short variable string
+        - left: '/:=.*?\"Hello\"/gm'
+          operator: test
+          right: '%actions.fileContents%'
+        else:
+          - type: respond
+            with: 02e_variables.md
+            issue: 2
+      
+      - 
 
+  
 
 tags:
   - golang

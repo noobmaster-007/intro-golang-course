@@ -2,7 +2,7 @@
 Let's modify the program a bit to output something else to our terminal.
 
 ### :keyboard: Activity: Replace `Hello World!` to `Hello <YOUR_NAME>`
-1. In `src/01_hello-world/main.go`, replace line 6 text`Hello World!` to `Hello <YOUR_NAME>!` e.g.
+1. In `src/01_hello-world/main.go`, replace line 7 text`Hello World!` to `Hello <YOUR_NAME>!` e.g.
     ```go
     fmt.Println("Hello John!")
     ```
@@ -14,3 +14,5 @@ Let's modify the program a bit to output something else to our terminal.
     git commit -m "Replce Hello World"
     git push
     ```
+
+I will respond you once you commits have been pushed.
