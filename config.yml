@@ -13,8 +13,9 @@ before:
       - 00_open-pr.md
 
 steps:
+
   # Step 1: User opens a PR after setup repo locally
-  - title: Get Started
+  - title: Open a pull request
     description: Welcome to Golang, let's get started.
     event: pull_request.opened
     link: '{{ repoUrl }}/issues/1'
@@ -33,8 +34,8 @@ steps:
         body: 01_hello-world-activity.md
 
         # The file property is based on the template file
-        file: src/01_hello_world.go
-        position: 2
+        file: src/01_hello-world/main.go
+        position: 7
 
   # Step 2: User modified the Hello World program
   - title: Hello World
@@ -42,8 +43,40 @@ steps:
     event: push
     link: '{{ repoUrl }}/issues/2'
     actions:
+      # Check whether the changes pushed to changes branch or not
+      - type: gate
+        left: '%payload.ref%'
+        operator: ===
+        right: refs/heads/changes
+     
+      - type: getPullRequest
+        pullRequest: 2
+        action_id: metaPR2
+      
+      - type: getFileContents
+        action_id: fileContents
+        filename: 'src/01_hello-world/main.go'
+      
+      # Using regex to check the file content
+      - type: gate
+        left: '/\("Hello.*?"\)/gm'
+        operator: test
+        right: '%actions.fileContents%'
+        else:
+          - type: respond
+            with: 01e_hello-world.md
+            issue: 2
+      
+      # Respond to next instruction
       - type: respond
-        with: 02_test.md
+        with: 02_variables.md
+        issue: 2
+
+      - type: createPullRequestComment
+        body: 02_variables-activity.md
+        file: 'src/02_variables/main.go'
+        position: 3
+
 
 
 tags:

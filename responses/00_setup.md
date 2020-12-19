@@ -16,7 +16,8 @@ In this repository, there we two branches - `main` and `changes`. We will workin
 4. You can verify the installation by `go -version`.
 5. Change to the directory that you would like place the course repo.
 6. Clone the repository: `git clone {{ repoUrl }}`
-7. Switch to branch `changes`, `git checkout changes`
-8. Run `go run GOFILE`, you should see `Hello World!` printed in your terminal.
+7. Change to the directory, `cd intro-golang`
+8. Switch to branch `changes`, `git checkout changes`
+9. Run `go run src/01_hello-world/main.go`, you should see `Hello World!` printed in your terminal.
 
 Now you have executed your first go program. We will learn more features in the rest of the course.
